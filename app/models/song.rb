@@ -3,6 +3,8 @@ class Song < ActiveRecord::Base
   belongs_to :genre
   has_many :notes 
 
+  accepts_nested_attributes_for :notes
+
   # def genre_name=(name)
   #   self.genre_name = name 
   # end #genre_name=
@@ -19,11 +21,4 @@ class Song < ActiveRecord::Base
     self.artist ? self.artist.name : nil 
   end #artist_name
 
-  def notes_content=(content)
-    self.notes << Note.create(content: content)
-  end
-
-  def notes_content
-    self.notes.first ? self.notes.first : nil   
-  end
 end
