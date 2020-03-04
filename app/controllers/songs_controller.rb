@@ -11,6 +11,8 @@ class SongsController < ApplicationController
   def new
     # binding.pry
     @song = Song.new
+    @song.notes.build(content: '')
+    @song.notes.build(content: '')
     
   end
 
@@ -50,7 +52,12 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:artist_name, :genre_id, :title)
+    params.require(:song).permit(
+      :artist_name,
+      :genre_id,
+      :title,
+      notes_attributes: [:content]
+    )
   end
 end
 
