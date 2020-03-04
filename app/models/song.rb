@@ -4,6 +4,11 @@ class Song < ActiveRecord::Base
   has_many :notes
   accepts_nested_attributes_for :notes
 
+  def artist_attributes=(artist)
+    self.artist = Artist.find_or_create_by(name: artist[:name])
+    self.artist.update(artist)
+  end
+
   # def genre_name=(name)
   #   self.genre = Genre.find_or_create_by(name: name)
   # end
