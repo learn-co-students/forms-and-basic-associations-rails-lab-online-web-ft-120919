@@ -9,8 +9,13 @@ class Song < ActiveRecord::Base
   end
 
   def artist_name
-    self.artist.name
+    self.artist ? self.artist.name : nil
   end
-
-
+  def notes_attributes=(contents)
+    contents.each do |content|
+      if content.strip != ''
+        self.notes.build(content: content)
+      end
+    end
+  end
 end
