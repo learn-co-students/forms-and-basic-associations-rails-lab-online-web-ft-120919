@@ -9,11 +9,20 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
+    @song.build_artist
+    2.times {@song.notes.build}
   end
 
   def create
     @song = Song.new(song_params)
+    song_params[:notes_attributes].each do |index, note|
+      # byebug
 
+      !note.empty? ? @song.notes.find_or_create_by(content: note[:content]) : nil
+      @song.valid? ? @song.save : nil
+    end
+   
+    byebug
     if @song.save
       redirect_to @song
     else
@@ -23,6 +32,7 @@ class SongsController < ApplicationController
 
   def edit
     @song = Song.find(params[:id])
+    
   end
 
   def update
@@ -47,7 +57,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
+    params.require(:song).permit(:title, :artist_name, :genre_id, notes_attributes: [:content])
   end
 end
 
