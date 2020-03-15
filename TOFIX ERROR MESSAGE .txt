@@ -1,0 +1,31 @@
+
+
+TODO : use https://apidock.com/rails/v5.2.3/ActiveRecord/NestedAttributes/ClassMethods/accepts_nested_attributes_for
+
+accepts_nested_attributes_for(*attr_names) public
+
+
+Unsure if I am white listing the  array of note_ids as specified by the unit tests.
+
+
+  2) the song form creates a song with notes
+     Failure/Error: fill_in :song_notes_attributes_0_content, with: 'great piano'
+
+     Capybara::ElementNotFound:
+       Unable to find field :song_notes_attributes_0_content that is not disabled
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/node/finders.rb:302:in `block in synced_resolve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/node/base.rb:83:in `synchronize'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/node/finders.rb:291:in `synced_resolve'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/node/finders.rb:52:in `find'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/node/actions.rb:91:in `fill_in'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/session.rb:759:in `block (2 levels) in <class:Session>'
+     # /home/arthur/.rvm/gems/ruby-2.6.3/gems/capybara-3.31.0/lib/capybara/dsl.rb:58:in `block (2 levels) in <module:DSL>'
+     # ./spec/features/song_form_spec.rb:34:in `block (2 levels) in <top (required)>'
+
+Finished in 1.72 seconds (files took 14.69 seconds to load)
+6 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/features/song_form_spec.rb:21 # the song form creates a song with a genre
+rspec ./spec/features/song_form_spec.rb:31 # the song form creates a song with notes

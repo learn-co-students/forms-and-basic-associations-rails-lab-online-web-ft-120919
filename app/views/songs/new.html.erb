@@ -24,9 +24,14 @@ Sample usage (selecting the associated Author for an instance of Post, @post):
   -->
   <%= f.collection_select :genre_id, Genre.all, :id, :name %>
   <br />
-  <input name="notes[attributes][][content]">
-  <br />
-  <input name="notes[attributes][][content]">
+
+  <%= f.fields_for :notes, @song.notes.build do |notes_fields| %>
+    <%= notes_fields.text_field :content %>
+  <% end %>
+  <%= f.fields_for :notes, @song.notes.build do |notes_fields| %>
+    <%= notes_fields.text_field :content %>
+  <% end %>
+  <br>
 
   <!--
   => <ActionController::Parameters

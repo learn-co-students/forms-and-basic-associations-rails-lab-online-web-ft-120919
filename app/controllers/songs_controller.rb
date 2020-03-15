@@ -48,11 +48,12 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title, :artist_name, :genre_id, notes: [{ attributes: :content}]  )
+    params.require(:song).permit(:title, :artist_name, :genre_id,  notes_attributes: [:content]  )
     end
 
 =begin
-  https://apidock.com/rails/ActionController/Parameters/permit
+
+From:https://apidock.com/rails/ActionController/Parameters/permit
 params = ActionController::Parameters.new({
   person: {
     name: "Francesco",
@@ -63,7 +64,6 @@ params = ActionController::Parameters.new({
     }]
   }
 })
-
 permitted = params.permit(person: [ :name, { pets: :name } ])
 =end
 end
