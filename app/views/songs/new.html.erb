@@ -4,7 +4,48 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <br />
+  <%= f.label :artist_name %>
+  <%= f.text_field :artist_name %>
+  <br />
+  <!--
+  https://apidock.com/rails/ActionView/Helpers/FormOptionsHelper/collection_select
+class Post < ActiveRecord::Base
+  belongs_to :author
+end
 
+class Author < ActiveRecord::Base
+  has_many :posts
+  def name_with_initial
+    "#{first_name.first}. #{last_name}"
+  end
+end
+Sample usage (selecting the associated Author for an instance of Post, @post):
+  collection_select(:post, :author_id, Author.all, :id, :name_with_initial, prompt: true)
+  -->
+  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+  <br />
+
+  <%= f.fields_for :notes, @song.notes.build do |notes_fields| %>
+    <%= notes_fields.text_field :content %>
+  <% end %>
+  <%= f.fields_for :notes, @song.notes.build do |notes_fields| %>
+    <%= notes_fields.text_field :content %>
+  <% end %>
+  <br>
+
+  <!--
+  => <ActionController::Parameters
+  {"utf8"=>"✓",
+  "song"=>{"title"=>"Little Earthquakes", "artist_name"=>"", "genre_id"=>"1"},
+  "notes"=>{
+              "attributes"=>[
+                              {"content"=>""},
+                              {"content"=>""}
+                          ]
+            },
+  -->
+
+  <br />
   <%= f.submit %>
 <% end %>
 

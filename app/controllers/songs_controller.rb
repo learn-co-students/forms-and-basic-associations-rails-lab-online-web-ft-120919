@@ -12,6 +12,7 @@ class SongsController < ApplicationController
   end
 
   def create
+    #binding.pry
     @song = Song.new(song_params)
 
     if @song.save
@@ -47,7 +48,23 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
-  end
+    params.require(:song).permit(:title, :artist_name, :genre_id,  notes_attributes: [:content]  )
+    end
+
+=begin
+
+From:https://apidock.com/rails/ActionController/Parameters/permit
+params = ActionController::Parameters.new({
+  person: {
+    name: "Francesco",
+    age:  22,
+    pets: [{
+      name: "Purplish",
+      category: "dogs"
+    }]
+  }
+})
+permitted = params.permit(person: [ :name, { pets: :name } ])
+=end
 end
 
