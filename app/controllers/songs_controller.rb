@@ -12,6 +12,9 @@ class SongsController < ApplicationController
   end
 
   def create
+    #byebug
+    #@song = @song.artist.build(song_params) 
+    #byebug
     @song = Song.new(song_params)
 
     if @song.save
@@ -47,7 +50,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
+    params.require(:song).permit(:title, :artist_name, :genre_id, note_contents: [])
   end
 end
 
